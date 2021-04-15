@@ -14,7 +14,7 @@ resource "aws_vpc" "yap_vpc" {
 }
 
 resource "aws_subnet" "yap_public_subnet" {
-  count = length(var.public_cidrs)
+  count = var.public_subnet_count
   vpc_id = aws_vpc.yap_vpc.id
   cidr_block = var.public_cidrs[count.index]
   map_public_ip_on_launch = true
@@ -26,7 +26,7 @@ resource "aws_subnet" "yap_public_subnet" {
 }
 
 resource "aws_subnet" "yap_private_subnet" {
-  count = length(var.private_cidrs)
+  count = var.private_subnet_count
   vpc_id = aws_vpc.yap_vpc.id
   cidr_block = var.private_cidrs[count.index]
   map_public_ip_on_launch = false

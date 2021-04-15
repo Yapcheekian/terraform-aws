@@ -9,3 +9,11 @@ variable "public_cidrs" {
 variable "private_cidrs" {
     type = list
 }
+
+variable "public_subnet_count" {
+    type = string
+}
+
+variable "private_subnet_count" {
+    type = string
+}
