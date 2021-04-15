@@ -32,6 +32,12 @@ resource "aws_subnet" "yap_public_subnet" {
   }
 }
 
+resource "aws_route_table_association" "yap_public_association" {
+  count = var.public_subnet_count
+  subnet_id = aws_subnet.yap_public_subnet.*.id[count.index]
+  route_table_id = aws_route_table.yap_public_rt.id
+}
+
 resource "aws_subnet" "yap_private_subnet" {
   count = var.private_subnet_count
   vpc_id = aws_vpc.yap_vpc.id
@@ -41,5 +47,35 @@ resource "aws_subnet" "yap_private_subnet" {
 
   tags = {
     "Name" = "yap_private_${count.index + 1}"
+  }
+}
+
+resource "aws_internet_gateway" "yap_igw" {
+  vpc_id = aws_vpc.yap_vpc.id
+
+  tags = {
+    "Name" = "yap_igw"
+  }
+}
+
+resource "aws_route_table" "yap_public_rt" {
+  vpc_id = aws_vpc.yap_vpc.id
+
+  tags = {
+    "Name" = "yap_public_rt"
+  }
+}
+
+resource "aws_route" "default_route" {
+  route_table_id = aws_route_table.yap_public_rt.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.yap_igw.id
+}
+
+resource "aws_default_route_table" "yap_private_rt" {
+  default_route_table_id = aws_vpc.yap_vpc.default_route_table_id
+
+  tags = {
+    "Name" = "yap_private"
   }
 }
