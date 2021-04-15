@@ -11,9 +11,13 @@ variable "private_cidrs" {
 }
 
 variable "public_subnet_count" {
-    type = string
+    type = number
 }
 
 variable "private_subnet_count" {
-    type = string
+    type = number
+}
+
+variable "max_subnets" {
+    type = number
 }
