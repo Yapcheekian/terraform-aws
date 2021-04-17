@@ -3,11 +3,11 @@ variable "vpc_cidr" {
 }
 
 variable "public_cidrs" {
-  type = list
+  type = list(any)
 }
 
 variable "private_cidrs" {
-  type = list
+  type = list(any)
 }
 
 variable "public_subnet_count" {
@@ -25,3 +25,5 @@ variable "max_subnets" {
 variable "access_ip" {
   type = string
 }
+
+variable "security_groups" {}

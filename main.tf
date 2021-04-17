@@ -1,10 +1,8 @@
-locals {
-  vpc_cidr = "10.0.0.0/16"
-}
 module "networking" {
   source               = "./networking"
   vpc_cidr             = local.vpc_cidr
   access_ip            = var.access_ip
+  security_groups = local.security_groups
   public_subnet_count  = 2
   private_subnet_count = 3
   max_subnets          = 20
