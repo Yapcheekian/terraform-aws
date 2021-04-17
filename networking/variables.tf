@@ -1,23 +1,27 @@
 variable "vpc_cidr" {
-    type = string
+  type = string
 }
 
 variable "public_cidrs" {
-    type = list
+  type = list
 }
 
 variable "private_cidrs" {
-    type = list
+  type = list
 }
 
 variable "public_subnet_count" {
-    type = number
+  type = number
 }
 
 variable "private_subnet_count" {
-    type = number
+  type = number
 }
 
 variable "max_subnets" {
-    type = number
+  type = number
+}
+
+variable "access_ip" {
+  type = string
 }
