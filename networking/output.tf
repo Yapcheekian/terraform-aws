@@ -9,3 +9,11 @@ output "db_subnet_group_name" {
 output "db_security_group" {
   value = [aws_security_group.yap_sg["private"].id]
 }
+
+output "public_subnets" {
+  value = aws_subnet.yap_public_subnet.*.id
+}
+
+output "public_sg" {
+  value = aws_security_group.yap_sg["public"].id
+}

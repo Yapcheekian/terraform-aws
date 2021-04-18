@@ -107,8 +107,8 @@ resource "aws_security_group" "yap_sg" {
 }
 
 resource "aws_db_subnet_group" "yap_rds_subnet_group" {
-  count = var.db_subnet_group == true ? 1 : 0
-  name = "yap_rds_subnet_group"
+  count      = var.db_subnet_group == true ? 1 : 0
+  name       = "yap_rds_subnet_group"
   subnet_ids = aws_subnet.yap_private_subnet.*.id
   tags = {
     Name = "yap_rds_subnet_group"
